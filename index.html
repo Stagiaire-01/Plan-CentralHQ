@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Plan HQ">
+
+<link rel="apple-touch-icon" href="icone.png">
+    <title>Plan Bâtiment Interactif</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="jspdf.umd.min.js"></script>
+    <script src="jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<div class="main-layout">
+    <div class="map-area">
+        <h1 class="main-title">PLAN CENTRAL HQ</h1>
+        <div class="floor-selector">
+            <button class="floor-btn active" onclick="showFloor('niveau1')">Niveau 1</button>
+            <button class="floor-btn" onclick="showFloor('niveau2')">Niveau 2</button>
+            
+
+            <button onclick="exportToPDF()">
+                📄 Exporter Rapport PDF
+            </button>
+        </div>
+
+    <div class="map-container">
+        <div id="network-status" class="status-online">🟢 En ligne</div>
+        <div id="niveau1" class="floor" style="opacity: 1;">
+            <svg viewBox="0 0 5250 2290" class="building-svg">
+<rect class="room" data-floor="niveau1" data-room="001" x="2700" y="1910" width="160" height="270" fill="#ccc" stroke="black"/>
+<text x="2760" y="2050">001</text>
+<rect class="room" data-floor="niveau1" data-room="002" x="2220" y="1630" width="470" height="550" fill="#ccc" stroke="black"/>
+<text x="2455" y="1900">002</text>
+<rect class="room" data-floor="niveau1" data-room="003" x="1660" y="1630" width="550" height="550" fill="#ccc" stroke="black"/>
+<text x="1935" y="1900">003</text>
+<rect class="room" data-floor="niveau1" data-room="012" x="1080" y="840" width="2350" height="780" fill="#ccc" stroke="black"/>
+<text x="2190" y="1245">012</text>
+<rect class="room" data-floor="niveau1" data-room="004" x="1340" y="1570" width="310" height="610" fill="#ccc" stroke="black"/>
+<text x="1455" y="1870">004</text>
+<rect class="room" data-floor="niveau1" data-room="007" x="50" y="300" width="1020" height="1880" fill="#ccc" stroke="black"/>
+<text x="460" y="1265">007</text>
+<rect class="room" data-floor="niveau1" data-room="005" x="790" y="1980" width="280" height="200" fill="#ccc" stroke="black"/>
+<text x="900" y="2080">005</text>
+<rect class="room" data-floor="niveau1" data-room="006" x="790" y="1570" width="280" height="400" fill="#ccc" stroke="black"/>
+<text x="900" y="1770">006</text>
+<rect class="room" data-floor="niveau1" data-room="008" x="700" y="300" width="370" height="800" fill="#ccc" stroke="black"/>
+<text x="855" y="700">008</text>
+<rect class="room" data-floor="niveau1" data-room="009" x="1080" y="300" width="320" height="720" fill="#ccc" stroke="black"/>
+<text x="1210" y="660">009</text>
+<rect class="room" data-floor="niveau1" data-room="010" x="1080" y="1030" width="740" height="300" fill="#ccc" stroke="black"/>
+<text x="1450" y="1180">010</text>
+<rect class="room" data-floor="niveau1" data-room="011" x="1410" y="300" width="1330" height="530" fill="#ccc" stroke="black"/>
+<text x="2075" y="565">011</text>
+<rect class="room" data-floor="niveau1" data-room="013" x="2750" y="840" width="680" height="610" fill="#ccc" stroke="black"/>
+<text x="3085" y="1145">013</text>
+<rect class="room" data-floor="niveau1" data-room="014" x="2750" y="50" width="680" height="780" fill="#ccc" stroke="black"/>
+<text x="3090" y="445">014</text>
+<rect class="room" data-floor="niveau1" data-room="015" x="3250" y="1460" width="180" height="160" fill="#ccc" stroke="black"/>
+<text x="3320" y="1540">015</text>
+<rect class="room" data-floor="niveau1" data-room="016" x="3440" y="50" width="580" height="1400" fill="#ccc" stroke="black"/>
+<text x="3730" y="750">016</text>
+<rect class="room" data-floor="niveau1" data-room="017" x="4030" y="50" width="580" height="1400" fill="#ccc" stroke="black"/>
+<text x="4320" y="750">017</text>
+<rect class="room" data-floor="niveau1" data-room="018" x="4620" y="50" width="580" height="1400" fill="#ccc" stroke="black"/>
+<text x="4910" y="750">018</text>
+<rect class="room" data-floor="niveau1" data-room="019" x="3440" y="1460" width="1760" height="230" fill="#ccc" stroke="black"/>
+<text x="4320" y="1575">019</text>
+<rect class="room" data-floor="niveau1" data-room="020" x="3130" y="1630" width="300" height="320" fill="#ccc" stroke="black"/>
+<text x="3260" y="1790">020</text>
+<rect class="room" data-floor="niveau1" data-room="021" x="3130" y="1960" width="300" height="280" fill="#ccc" stroke="black"/>
+<text x="3260" y="2095">021</text>
+<rect class="room" data-floor="niveau1" data-room="022" x="2700" y="1630" width="160" height="270" fill="#ccc" stroke="black"/>
+<text x="2760" y="1765">022</text>
+<rect class="room" data-floor="niveau1" data-room="ESC-01" x="2870" y="1630" width="250" height="610" fill="#ccc" stroke="black"/>
+<text x="2940" y="1930">ESC 1</text>
+<rect class="room" data-floor="niveau1" data-room="ESC-02" x="1080" y="1570" width="250" height="610" fill="#ccc" stroke="black"/>
+<text x="1150" y="1875">ESC 2</text>
+            </svg>
+        </div>
+
+        <div id="niveau2" class="floor" style="display:none; opacity: 0;">
+            <svg viewBox="0 0 5250 2290" class="building-svg">
+<rect class="room" data-floor="niveau2" data-room="100" x="1080" y="780" width="2350" height="1120" fill="#ccc" stroke="black"/>
+<text x="2180" y="1330">100</text>
+<rect class="room" data-floor="niveau2" data-room="101" x="2220" y="780" width="570" height="250" fill="#ccc" stroke="black"/>
+<text x="2505" y="905">101</text>
+<rect class="room" data-floor="niveau2" data-room="102" x="2490" y="1630" width="370" height="610" fill="#ccc" stroke="black"/>
+<text x="2675" y="1935">102</text>
+<rect class="room" data-floor="niveau2" data-room="103" x="1820" y="1630" width="660" height="610" fill="#ccc" stroke="black"/>
+<text x="2150" y="1935">103</text>
+<rect class="room" data-floor="niveau2" data-room="104" x="1340" y="1630" width="470" height="610" fill="#ccc" stroke="black"/>
+<text x="1575" y="1935">104</text>
+<rect class="room" data-floor="niveau2" data-room="105" x="1080" y="2100" width="250" height="140" fill="#ccc" stroke="black"/>
+<text x="1175" y="2170">105</text>
+<rect class="room" data-floor="niveau2" data-room="106" x="1080" y="300" width="690" height="730" fill="#ccc" stroke="black"/>
+<text x="1425" y="665">106</text>
+<rect class="room" data-floor="niveau2" data-room="107" x="1780" y="300" width="960" height="470" fill="#ccc" stroke="black"/>
+<text x="2220" y="535">107</text>
+<rect class="room" data-floor="niveau2" data-room="108" x="2750" y="50" width="680" height="720" fill="#ccc" stroke="black"/>
+<text x="3050" y="410">108</text>
+<rect class="room" data-floor="niveau2" data-room="109" x="3030" y="780" width="400" height="550" fill="#ccc" stroke="black"/>
+<text x="3230" y="1055">109</text>
+<rect class="room" data-floor="niveau2" data-room="110" x="3030" y="1340" width="400" height="170" fill="#ccc" stroke="black"/>
+<text x="3230" y="1425">110</text>
+<rect class="room" data-floor="niveau2" data-room="111" x="3220" y="1520" width="210" height="220" fill="#ccc" stroke="black"/>
+<text x="3305" y="1630">111</text>
+<rect class="room" data-floor="niveau2" data-room="112" x="3290" y="1750" width="140" height="150" fill="#ccc" stroke="black"/>
+<text x="3330" y="1825">112</text>
+<rect class="room" data-floor="niveau2" data-room="113" x="3130" y="1910" width="300" height="330" fill="#ccc" stroke="black"/>
+<text x="3260" y="2075">113</text>
+<rect class="room" data-floor="niveau2" data-room="114" x="3440" y="1730" width="1760" height="180" fill="#ccc" stroke="black"/>
+<text x="4325" y="1825">114</text>
+<rect class="room" data-floor="niveau2" data-room="115" x="2800" y="780" width="220" height="190" fill="#ccc" stroke="black"/>
+<text x="2890" y="875">115</text>
+<rect class="room" data-floor="niveau2" data-room="M001" x="50" y="1320" width="1020" height="860" fill="#ccc" stroke="black"/>
+<text x="550" y="1825">M001</text>
+<rect class="room" data-floor="niveau2" data-room="M002" x="3440" y="1460" width="580" height="260" fill="#ccc" stroke="black"/>
+<text x="3710" y="1590">M002</text>
+<rect class="room" data-floor="niveau2" data-room="M003" x="4030" y="1460" width="580" height="260" fill="#ccc" stroke="black"/>
+<text x="4300" y="1590">M003</text>
+<rect class="room" data-floor="niveau2" data-room="M004" x="4620" y="1460" width="580" height="260" fill="#ccc" stroke="black"/>
+<text x="4890" y="1590">M004</text>
+<rect class="room" data-floor="niveau2" data-room="007A" x="50" y="300" width="1020" height="1010" fill="#ccc" stroke="black"/>
+<text x="550" y="805">007A</text>
+<rect class="room" data-floor="niveau2" data-room="ESC-01" x="2870" y="1630" width="250" height="610" fill="#ccc" stroke="black"/>
+<text x="2940" y="1935">ESC 1</text>
+<rect class="room" data-floor="niveau2" data-room="ESC-02" x="1080" y="1440" width="250" height="650" fill="#ccc" stroke="black"/>
+<text x="1155" y="1745">ESC 2</text>
+            </svg>
+        </div>
+    </div> 
+    </div>
+    
+    <div id="panel">
+        <p>Sélectionnez une pièce sur le plan pour commencer.</p>
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB5MONzEsC8FfwuXrpDR3iOzjOfZziMF9s",
+  authDomain: "inspection-equipement.firebaseapp.com",
+  projectId: "inspection-equipement",
+  storageBucket: "inspection-equipement.firebasestorage.app",
+  messagingSenderId: "164217796642",
+  appId: "1:164217796642:web:5ff0b0f3e07003d9d8f27b"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+<script src="script.js?v=1.1"></script>
+</body>
+</html>

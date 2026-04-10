@@ -1,0 +1,351 @@
+/* =========================================
+   CONFIGURATION GLOBALE
+   ========================================= */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    /* Utilise -webkit-fill-available pour les navigateurs mobiles */
+    min-height: -webkit-fill-available;
+    position: relative; /* On retire fixed pour éviter les bugs de clavier */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden; 
+    overscroll-behavior: none;
+    font-size: 16px;
+    background-color: #f4f7f9;
+    /* Gère les bords arrondis des nouveaux iPad Pro/Air */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.building-svg {
+    height: 88vh;    
+    width: auto;    
+    max-width: 100%;  
+}
+
+.main-layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- ZONE DU PLAN (GAUCHE) --- */
+.map-area {
+    flex: 0 0 65%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border-right: 1px solid #ccc;
+    background-color: white;
+}
+
+/* --- Titre --- */
+.main-title {
+    position: fixed;
+    top: -15px;
+    left: 75%; 
+    transform: translateX(-50%);
+    color: #A9A9A9;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 20;
+}
+
+.floor-selector {
+    background: #2c3e50;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 1. Transition fluide entre les niveaux */
+.floor {
+    transition: opacity 0.4s ease-in-out;
+}
+
+.map-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #f0f2f5;
+    position: relative; /* CRUCIAL pour que l'indicateur se place par rapport à la carte */
+}
+
+#network-status {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1000;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    color: #27ae60; /* Vert par défaut */
+    font-weight: bold;
+    font-size: 1rem;
+    border: 2px solid #27ae60;
+}
+#network-status.status-offline { 
+    color: #e74c3c; 
+    border-color: #e74c3c; 
+}
+
+/* --- PANNEAU D'INFO (DROITE) --- */
+#panel {
+    flex: 0 0 35%;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 25px;
+    background-color: white;
+    box-sizing: border-box;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.05);
+    -webkit-overflow-scrolling: touch; 
+}
+
+#panel p:only-child {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50%;
+    color: #7f8c8d;
+}
+
+/* On s'assure que le bouton PDF reste à droite mais après le statut */
+button[onclick="exportToPDF()"] {
+    margin-left: 0; 
+}
+
+.room-title {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.back-btn {
+    font-size: 1.3rem; 
+    padding: 12px 25px;
+    font-weight: bold;
+    background-color: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.back-btn:hover { background-color: #dcdde1; }
+
+.radio-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #fdfdfd;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin: 10px 0;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input[type="radio"] { transform: scale(1.4); }
+
+.equipment {
+    margin-bottom: 15px; 
+    padding: 15px;
+    border: 1px solid #e0e6ed;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.equipment strong { font-size: 1rem; color: #34495e; }
+
+textarea {
+    width: 100%; margin-top: 8px; padding: 10px;
+    border: 1px solid #d1d9e0; border-radius: 6px;
+    font-family: inherit; box-sizing: border-box;
+}
+
+/* Boutons d'étage et État Actif */
+.floor-selector button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.floor-selector button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.floor-selector button.active {
+    background: rgba(52, 152, 219, 0.3);
+    border-color: #3498db;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+/* Bouton Save  */
+.save-btn {
+    background-color: #27ae60;
+    color: white; width: 100%;
+    padding: 18px; border: none;
+    border-radius: 10px; font-size: 1.2rem;
+    font-weight: bold; cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+.save-btn:hover { background-color: #219150; }
+.save-btn:disabled { background-color: #95a5a6; cursor: not-allowed; }
+
+/* STYLES SVG & ÉTAT SÉLECTIONNÉ */
+.room {
+    fill: #ffffff;
+    stroke: #2c3e50;
+    stroke-width: 2;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.room:hover { fill: #e8f4fd; }
+
+.room.selected {
+    fill: #3498db !important;
+    stroke-width: 4;
+}
+
+svg text { 
+    font-size: 2rem;  
+    font-weight: bold;
+    fill: #2c3e50;
+    pointer-events: none;
+}
+
+/* --- BOUTONS ÉQUIPEMENT & STATUTS --- */
+.equipment-btn {
+    display: flex; /* Permet d'aligner le texte et le logo */
+    justify-content: space-between; /* Pousse le logo à droite complètement */
+    align-items: center;
+    padding: 15px; 
+    font-size: 1.1rem; 
+    cursor: pointer;
+    border: 1px solid #e0e6ed; 
+    background-color: white;
+    width: 100%; 
+    border-radius: 8px; 
+    transition: 0.2s;
+}
+.equipment-btn:hover { 
+    background-color: #f8fbff; 
+    border-color: #3498db; 
+}
+
+/* Les petits ronds de statut */
+.status-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Les 3 couleurs de statut */
+.status-grey { background-color: #f1f2f6; color: #a4b0be; border: 1px solid #dfe4ea; } /* o */
+.status-orange { background-color: #f39c12; color: white; } /* - */
+.status-green { background-color: #27ae60; color: white; } /* ✓ */
+
+/* SPINNER DE CHARGEMENT */
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.custom-radio-group {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.custom-radio {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    background: #eee;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #666;
+    transition: 0.2s;
+}
+
+/* Couleurs quand on sélectionne */
+.custom-radio.active[data-value="C"] { background: #27ae60; color: white; border-color: #219150; }
+.custom-radio.active[data-value="NC"] { background: #e74c3c; color: white; border-color: #c0392b; }
+.custom-radio.active[data-value="N/A"] { background: #95a5a6; color: white; border-color: #7f8c8d; }
+
+.custom-textarea {
+    width: 100%;
+    height: 60px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-family: inherit;
+}
+
+/* ADAPTATION MOBILE */
+@media (max-width: 768px) {
+    .main-layout { flex-direction: column; }
+    
+    .map-area {
+        flex: 0 0 60vh;
+        height: 60vh;
+        border-right: none;
+    }
+    
+    #panel {
+        flex: 0 0 40vh;
+        height: 40vh;
+        border-top: 2px solid #ccc;
+        border-left: none;
+    }
+    
+    .building-svg { height: 50vh; }
+    
+    .main-title {
+        font-size: 1.5rem;
+        top: 0;
+    }
+    
+    .floor-selector button { padding: 8px 15px; margin-left: 10px; }
+}
