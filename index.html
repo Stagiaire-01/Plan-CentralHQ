@@ -158,7 +158,15 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 </script>
 
-<script src="data.js"></script>
+<script>
+    (function() {
+        var script = document.createElement('script');
+        // On ajoute l'heure précise pour que GitHub/Firebase livre le fichier frais
+        script.src = 'data.js?v=' + Date.now();
+        script.async = false; 
+        document.head.appendChild(script);
+    })();
+</script>
 <script src="script.js"></script>
 
 <script src="script.js?v=1.1"></script>
