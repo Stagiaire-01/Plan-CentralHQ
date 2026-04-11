@@ -1,4 +1,4 @@
-// Fichier généré le 2026-04-11 09:08:32
+// Fichier généré le 2026-04-11 09:24:40
 const data = {
     "niveau2": {
         "106": [
@@ -116,7 +116,7 @@ const data = {
             {"nom": "ROBINET MOTORISÉ RM-007G", "details": {"ÉTAT GÉNÉRAL": "À défénir", "DISCIPLINE": "Mécanique", "MARQUE": "BELIMO", "MODÈLE": "Z2050Q-F", "RÉSEAU DE TUYAUTERIE": "Boucle de chauffage (secondaire)", "DÉBIT LUQUIDE (L/S)": "0,10", "PERTE DE PRESSION (KPA)": "51,09", "DIAMÈTRE (MM)": "51,09"}},
             {"nom": "ROBINET MOTORISÉ RM-007H", "details": {"ÉTAT GÉNÉRAL": "À défénir", "DISCIPLINE": "Mécanique", "MARQUE": "BELIMO", "MODÈLE": "Z2050Q-F", "RÉSEAU DE TUYAUTERIE": "Boucle de chauffage (secondaire)", "DÉBIT LUQUIDE (L/S)": "0,10", "PERTE DE PRESSION (KPA)": "51,09", "DIAMÈTRE (MM)": "51,09"}},
             {"nom": "ROBINET PRISE D'EAU INTÉRIEUR RA-1", "details": {"ÉTAT GÉNÉRAL": "À défénir", "DISCIPLINE": "Plomberie", "MARQUE": "ZURN", "MODÈLE": "Z1341", "RÉSEAU DE TUYAUTERIE": "Eau Froide Service", "FT / DA": "FT-MEC017-0"}},
-            {"nom": "LAVE AUTO ", "details": {"ÉTAT GÉNÉRAL": "À défénir", "DISCIPLINE": "Mécanique de Prod"}}
+            {"nom": "PARKING ", "details": {"ÉTAT GÉNÉRAL": "À défénir", "DISCIPLINE": "Mécanique de Prod"}}
         ],
         "011": [
             {"nom": "AÉROTHERME A-011", "details": {"ÉTAT GÉNÉRAL": "À défénir", "DISCIPLINE": "Mécanique", "MARQUE": "ROSEMEX", "MODÈLE": "H-32", "RÉSEAU DE TUYAUTERIE": "Boucle de chauffage (secondaire)", "FT / DA": "FT-MEC-005-0", "DÉBIT LUQUIDE (L/S)": "0,16", "DÉBIT AIR (L/S)": "342,00", "PUISSANCE (KW)": "6,533433541854", "TEMPÉRATURE ENTRÉE (oC)": "77", "TEMPÉRATURE SORTIE (oC)": "66", "MOTEUR (HP)": "0,08"}},
