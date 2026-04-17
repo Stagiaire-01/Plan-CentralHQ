@@ -143,31 +143,26 @@
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSy...", // Ta clé API
-        authDomain: "inspection-equipement.firebaseapp.com",
-        projectId: "inspection-equipement",
-        storageBucket: "inspection-equipement.firebasestorage.app",
-        messagingSenderId: "...",
-        appId: "..."
-      };
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyB5MONzEsC8FfwuXrpDR3iOzjOfZziMF9s",
+    authDomain: "inspection-equipement.firebaseapp.com",
+    projectId: "inspection-equipement",
+    storageBucket: "inspection-equipement.firebasestorage.app",
+    messagingSenderId: "164217796642",
+    appId: "1:164217796642:web:5ff0b0f3e07003d9d8f27b"
+  };
+  
+  // Initialisation unique
+  if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
-      const db = firebase.database();
-    </script>
+  }
+  const db = firebase.database();
+</script>
 
-    <script>
-        (function() {
-            var script = document.createElement('script');
-            script.src = 'data.js?v=' + Date.now();
-            script.async = false;
-            document.head.appendChild(script);
-        })();
-    </script>
-    <script src="script.js"></script>
+<script src="script.js?v=1.1"></script>
 </body>
 </html>
