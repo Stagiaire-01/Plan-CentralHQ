@@ -9,22 +9,31 @@ try {
     }
 } catch(e) { localStorage.setItem('offlineQueue', '[]'); }
 
-// Connexion automatique pour satisfaire la règle "auth != null"
-firebase.auth().signInAnonymously()
-    .then(() => {
-        console.log("✅ Authentifié avec succès !");
-        
-        // Une fois connecté, on lance l'écoute des données
-        db.ref('inspections').on('value', function(snapshot) {
-            if (snapshot.exists()) {
-                localStorage.setItem('all_inspections', JSON.stringify(snapshot.val()));
-            }
-        });
-    })
-    .catch((error) => {
-        console.error("❌ Erreur d'authentification : ", error.code, error.message);
-        alert("Problème de connexion à la base de données. Vérifiez l'accès internet.");
-    });
+// Attendre que Firebase soit prêt
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof firebase !== 'undefined') {
+        firebase.auth().signInAnonymously()
+            .then(() => {
+                console.log("✅ Authentifié avec succès !");
+                // On active la synchronisation
+                db.ref('inspections').on('value', function(snapshot) {
+                    if (snapshot.exists()) {
+                        localStorage.setItem('all_inspections', JSON.stringify(snapshot.val()));
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error("❌ Erreur Auth:", error.code, error.message);
+                // Si c'est une erreur de domaine, on prévient plus précisément
+                if (error.code === 'auth/unauthorized-domain') {
+                    alert("Ce domaine n'est pas autorisé dans Firebase.");
+                } else {
+                    alert("Problème de connexion Firebase. Mode local activé.");
+                }
+            });
+    }
+});
+
 // ===== GESTION DU CACHE ET DE LA CONNEXION =====
 let dataCache = {};
 let isAppOnline = navigator.onLine; 
