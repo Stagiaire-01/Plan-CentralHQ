@@ -9,13 +9,14 @@ try {
     }
 } catch(e) { localStorage.setItem('offlineQueue', '[]'); }
 
-// Attendre que Firebase soit prêt
+// --- CETTE FONCTION ENVELOPPE TOUT LE RESTE DU FICHIER ---
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Lancer l'authentification
     if (typeof firebase !== 'undefined') {
         firebase.auth().signInAnonymously()
             .then(() => {
                 console.log("✅ Authentifié avec succès !");
-                // On active la synchronisation
                 db.ref('inspections').on('value', function(snapshot) {
                     if (snapshot.exists()) {
                         localStorage.setItem('all_inspections', JSON.stringify(snapshot.val()));
@@ -23,20 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             })
             .catch((error) => {
-                console.error("❌ Erreur Auth:", error.code, error.message);
-                // Si c'est une erreur de domaine, on prévient plus précisément
-                if (error.code === 'auth/unauthorized-domain') {
-                    alert("Ce domaine n'est pas autorisé dans Firebase.");
-                } else {
-                    alert("Problème de connexion Firebase. Mode local activé.");
-                }
+                console.error("❌ Erreur Auth:", error.message);
             });
     }
+
+    // 2. ACTIVER LES CLICS SUR LES PIÈCES
+    document.querySelectorAll('.room').forEach(room => {
+        room.addEventListener('click', function() {
+            const roomName = this.getAttribute('data-room');
+            const floor = this.getAttribute('data-floor');
+            console.log("Clic sur pièce :", roomName); // Pour vérifier dans la console
+            if (typeof selectRoom === "function") {
+                selectRoom(roomName, floor);
+            }
+        });
+    });
 });
 
 // ===== GESTION DU CACHE ET DE LA CONNEXION =====
 let dataCache = {};
-let isAppOnline = navigator.onLine; 
+let isAppOnline = navigator.onLine;
 
 // Clone la base de données Firebase en arrière-plan
 db.ref('inspections').on('value', function(snapshot) {
