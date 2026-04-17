@@ -9,6 +9,22 @@ try {
     }
 } catch(e) { localStorage.setItem('offlineQueue', '[]'); }
 
+// Connexion automatique pour satisfaire la règle "auth != null"
+firebase.auth().signInAnonymously()
+    .then(() => {
+        console.log("✅ Authentifié avec succès !");
+        
+        // Une fois connecté, on lance l'écoute des données
+        db.ref('inspections').on('value', function(snapshot) {
+            if (snapshot.exists()) {
+                localStorage.setItem('all_inspections', JSON.stringify(snapshot.val()));
+            }
+        });
+    })
+    .catch((error) => {
+        console.error("❌ Erreur d'authentification : ", error.code, error.message);
+        alert("Problème de connexion à la base de données. Vérifiez l'accès internet.");
+    });
 // ===== GESTION DU CACHE ET DE LA CONNEXION =====
 let dataCache = {};
 let isAppOnline = navigator.onLine; 
