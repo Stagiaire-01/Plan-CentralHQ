@@ -156,13 +156,21 @@
     appId: "1:164217796642:web:5ff0b0f3e07003d9d8f27b"
   };
   
-  // Initialisation unique
   if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
   }
   const db = firebase.database();
 </script>
 
-<script src="script.js?v=99"></script>
+<script>
+    (function() {
+        var script = document.createElement('script');
+        script.src = 'data.js?v=' + Date.now();
+        script.async = false; 
+        document.head.appendChild(script);
+    })();
+</script>
+
+<script src="script.js?v=100"></script>
 </body>
 </html>
