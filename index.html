@@ -10,7 +10,6 @@
 <link rel="apple-touch-icon" href="icone.png">
     <title>Plan Bâtiment Interactif</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="jspdf.umd.min.js"></script>
     <script src="jspdf.plugin.autotable.min.js"></script>
 </head>
@@ -144,32 +143,31 @@
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyB5MONzEsC8FfwuXrpDR3iOzjOfZziMF9s",
-  authDomain: "inspection-equipement.firebaseapp.com",
-  projectId: "inspection-equipement",
-  storageBucket: "inspection-equipement.firebasestorage.app",
-  messagingSenderId: "164217796642",
-  appId: "1:164217796642:web:5ff0b0f3e07003d9d8f27b"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-</script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-<script>
-    (function() {
-        var script = document.createElement('script');
-        // On ajoute l'heure précise pour que GitHub/Firebase livre le fichier frais
-        script.src = 'data.js?v=' + Date.now();
-        script.async = false; 
-        document.head.appendChild(script);
-    })();
-</script>
-<script src="script.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSy...", // Ta clé API
+        authDomain: "inspection-equipement.firebaseapp.com",
+        projectId: "inspection-equipement",
+        storageBucket: "inspection-equipement.firebasestorage.app",
+        messagingSenderId: "...",
+        appId: "..."
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+    </script>
 
-<script src="script.js?v=1.1"></script>
+    <script>
+        (function() {
+            var script = document.createElement('script');
+            script.src = 'data.js?v=' + Date.now();
+            script.async = false;
+            document.head.appendChild(script);
+        })();
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
