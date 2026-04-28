@@ -275,8 +275,34 @@ svg text {
 
 /* Les 3 couleurs de statut */
 .status-grey { background-color: #f1f2f6; color: #a4b0be; border: 1px solid #dfe4ea; } /* o */
-.status-orange { background-color: #f39c12; color: white; } /* - */
+.status-orange { 
+    background-color: #e67e22; 
+    color: white; 
+}
 .status-green { background-color: #27ae60; color: white; } /* ✓ */
+.status-yellow { 
+    background-color: #f1c40f; 
+    color: white; 
+}
+
+/* Bouton Supprimer */
+.delete-btn {
+    background-color: #ffffff;
+    color: #e74c3c;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e74c3c;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+}
 
 /* SPINNER DE CHARGEMENT */
 .spinner {
