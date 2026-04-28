@@ -284,6 +284,12 @@ svg text {
     background-color: #f1c40f; 
     color: white; 
 }
+.status-red {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    animation: pulse-red 2s infinite; /* Optionnel: petit effet d'attention */
+}
 
 /* Bouton Supprimer */
 .delete-btn {
