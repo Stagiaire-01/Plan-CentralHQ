@@ -161,18 +161,30 @@ function showEquipments(floor, roomNumber) {
         let statusSymbol = "o"; 
         
         const isOfflineSaved = offlineQueue.find(q => q.path === firebasePath);
-        let isOnlineSaved = false;
+        let savedData = null;
         
         if (allInspections[floor] && allInspections[floor][roomNumber] && allInspections[floor][roomNumber][safeEqName]) {
-            isOnlineSaved = true;
+            savedData = allInspections[floor][roomNumber][safeEqName];
         }
 
         if (isOfflineSaved) {
-            statusClass = "status-orange";
-            statusSymbol = "-";
-        } else if (isOnlineSaved) {
-            statusClass = "status-green";
-            statusSymbol = "✓";
+            // JAUNE: Sauvegarde locale (Attente de synchronisation)
+            statusClass = "status-yellow";
+            statusSymbol = "💾";
+        } else if (savedData) {
+            // Vérification si toutes les propriétés sont remplies
+            const totalProps = Object.keys(eq.details).length;
+            const filledProps = Object.values(savedData.details || {}).filter(d => d.etat && d.etat !== "").length;
+
+            if (filledProps >= totalProps) {
+                // VERT: Enregistré et complet
+                statusClass = "status-green";
+                statusSymbol = "✓";
+            } else {
+                // ORANGE: Enregistré mais incomplet
+                statusClass = "status-orange";
+                statusSymbol = "!";
+            }
         }
 
         html += `<button class="equipment-btn" onclick="openForm('${floor}','${roomNumber}', ${index})">
@@ -256,9 +268,12 @@ function renderForm(savedData, floor, roomNumber, index) {
         </div>`;
     }
 
-    html += `</form>
+	html += `</form>
              <button class="save-btn" onclick="saveReport(event, '${floor}', '${roomNumber}', ${index})">
                  Enregistrer les données
+             </button>
+             <button class="delete-btn" onclick="deleteReport('${floor}', '${roomNumber}', ${index})" style="margin-top:15px;">
+                 Supprimer l'équipement
              </button>`;
 
     panel.innerHTML = html;
@@ -386,4 +401,34 @@ function exportToPDF() {
     }
     
     if(btn) btn.innerHTML = "📄 Exporter Rapport PDF";
+}
+
+// ===== DELETE INFO =====
+function deleteReport(floor, room, eqIndex) {
+    const eq = data[floor][room][eqIndex];
+    const safeEqName = sanitizeKey(eq.nom);
+    const firebasePath = 'inspections/' + floor + '/' + room + '/' + safeEqName;
+
+    // Fenêtre de confirmation
+    if (confirm("Êtes-vous sûr de vouloir supprimer l'information de l'équipement ?")) {
+        
+        // 1. Supprimer de Firebase
+        if (typeof firebase !== 'undefined' && navigator.onLine) {
+            firebase.database().ref(firebasePath).remove()
+                .then(() => {
+                    // 2. Nettoyer le cache local
+                    let allInspections = JSON.parse(localStorage.getItem('all_inspections')) || {};
+                    if (allInspections[floor] && allInspections[floor][room]) {
+                        delete allInspections[floor][room][safeEqName];
+                        localStorage.setItem('all_inspections', JSON.stringify(allInspections));
+                    }
+                    
+                    alert("Données supprimées avec succès.");
+                    showEquipments(floor, room); // Retour à la liste
+                })
+                .catch((error) => alert("Erreur lors de la suppression : " + error.message));
+        } else {
+            alert("Vous devez être en ligne pour supprimer les données du Cloud.");
+        }
+    }
 }
