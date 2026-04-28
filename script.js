@@ -171,19 +171,26 @@ function showEquipments(floor, roomNumber) {
             // JAUNE: Sauvegarde locale (Attente de synchronisation)
             statusClass = "status-yellow";
             statusSymbol = "💾";
-        } else if (savedData) {
-            // Vérification si toutes les propriétés sont remplies
-            const totalProps = Object.keys(eq.details).length;
-            const filledProps = Object.values(savedData.details || {}).filter(d => d.etat && d.etat !== "").length;
 
-            if (filledProps >= totalProps) {
-                // VERT: Enregistré et complet
+        } else if (savedData) {
+
+	    const detailsArray = Object.values(savedData.details || {});
+            const hasNC = detailsArray.some(d => d.etat === "NC");
+            const totalProps = Object.keys(eq.details).length;
+            const filledProps = detailsArray.filter(d => d.etat && d.etat !== "").length;
+
+            if (hasNC) {
+                // ROUGE: Au moins un point NC
+                statusClass = "status-red";
+                statusSymbol = "!";
+            } else if (filledProps >= totalProps) {
+                // VERT: Tout est coché et aucun NC
                 statusClass = "status-green";
                 statusSymbol = "✓";
             } else {
-                // ORANGE: Enregistré mais incomplet
+                // ORANGE: Partiellement rempli, aucun NC pour l'instant
                 statusClass = "status-orange";
-                statusSymbol = "!";
+                statusSymbol = "..."; 
             }
         }
 
