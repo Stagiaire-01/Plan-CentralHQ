@@ -280,7 +280,7 @@ function renderForm(savedData, floor, roomNumber, index) {
                  Enregistrer les données
              </button>
              <button class="delete-btn" onclick="deleteReport('${floor}', '${roomNumber}', ${index})" style="margin-top:15px;">
-                 Supprimer l'équipement
+                 Supprimer les données
              </button>`;
 
     panel.innerHTML = html;
